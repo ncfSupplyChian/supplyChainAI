@@ -1,5 +1,5 @@
-# flask-demo
-flask 项目案例与常见需求 demo
+# supplyChainAI
+flask sklearn 开发模型
 
 ```shell
 $ virtualenv venv
