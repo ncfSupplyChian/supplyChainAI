@@ -2,6 +2,8 @@
 from flask import Blueprint, render_template,\
     session, redirect, url_for
 from .forms import NameForm
+from .models.accounts import User
+from .models import db
 
 bp = Blueprint('default', __name__)
 
@@ -19,3 +21,15 @@ def index():
 @bp.route('/user/<name>')
 def user(name):
     return render_template('default/user.html', name=name)
+
+
+@bp.route('/test/<name>')
+def test(name):
+    user = User(name)
+    print(user.__repr__())
+    #db.session.add(user)
+    #db.session.commit()
+    users = User.query.all()
+    print(users)
+    userResult = User.query.filter_by(username=name).first()
+    return render_template('default/user.html', name=userResult.username)

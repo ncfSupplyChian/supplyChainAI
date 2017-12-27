@@ -9,4 +9,4 @@ class DevelopmentConfig(Config):
 
     # SQLAlchemy config
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'mysql://root:password@localhost:3306/database'
+        'mysql://root:19860103@localhost:3306/test'

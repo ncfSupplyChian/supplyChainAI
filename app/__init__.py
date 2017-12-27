@@ -26,4 +26,7 @@ def registe_routes(app):
     """Register routes."""
     from . import views
     app.register_blueprint(views.bp)
-    # print app.url_map
+    from . import apis
+    app.register_blueprint(apis.bp)
+
+    print(app.url_map)

@@ -1,6 +1,7 @@
 # Flask packages
 
-flask  # Successfully installed flask Werkzeug Jinja2 itsdangerous MarkupSafe
+# Successfully installed flask Werkzeug Jinja2 itsdangerous MarkupSafe
+flask
 flask-script
 
 # templates
@@ -21,3 +22,8 @@ flask-mail
 # redis==2.10.3
 # Markdown
 # supervisor
+
+#AI
+numpy
+pandas
+scikit-learn
