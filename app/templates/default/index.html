@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block title %}home - default{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="page-header">
+    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+</div>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}
