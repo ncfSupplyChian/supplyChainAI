@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn import metrics
 
-bp = Blueprint('api', __name__)
+bp = Blueprint('apis', __name__)
 
 tasks =[
     {

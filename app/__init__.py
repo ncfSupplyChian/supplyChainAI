@@ -28,5 +28,7 @@ def registe_routes(app):
     app.register_blueprint(views.bp)
     from app.resources import apis
     app.register_blueprint(apis.bp)
+    from app.resources import userViews
+    app.register_blueprint(userViews.users, url_prefix='/api/v1/users')
 
     print(app.url_map)

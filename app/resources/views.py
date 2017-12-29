@@ -27,8 +27,8 @@ def user(name):
 def test(name):
     user = User(name)
     print(user.__repr__())
-    #db.session.add(user)
-    #db.session.commit()
+    db.session.add(user)
+    db.session.commit()
     users = User.query.all()
     print(users)
     userResult = User.query.filter_by(username=name).first()

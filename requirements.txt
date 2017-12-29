@@ -20,6 +20,10 @@ flask-migrate
 # utils
 flask-mail
 
+#check
+marshmallow
+marshmallow-jsonapi
+
 # redis==2.10.3
 # Markdown
 # supervisor
