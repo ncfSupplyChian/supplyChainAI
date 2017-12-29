@@ -2,8 +2,8 @@
 from flask import Blueprint, render_template,\
     session, redirect, url_for
 from .forms import NameForm
-from .models.accounts import User
-from .models import db
+from app.models.accounts import User
+from app.models import db
 
 bp = Blueprint('default', __name__)
 

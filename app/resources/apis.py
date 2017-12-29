@@ -34,10 +34,10 @@ def test():
     km.fit(dataMat)  # 拟合
     km_pred = km.predict(dataMat)  # 预测
     centers = km.cluster_centers_  # 质心
-    for temp in centers:
-        for tempPoint in temp:
-            print(tempPoint)
-        print("")
+    # for temp in centers:
+    #     for tempPoint in temp:
+    #         print(tempPoint)
+    #     print("")
     f = open("E:\\code\\python\\kmeans\\result.txt", "w")
     for test in km_pred:
         print(test, file=f)

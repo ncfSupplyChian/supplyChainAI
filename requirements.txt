@@ -8,6 +8,7 @@ flask-script
 jinja2
 flask-bootstrap
 flask-moment
+flask-restful
 
 # form
 flask-wtf

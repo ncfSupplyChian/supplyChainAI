@@ -24,9 +24,9 @@ def make_app(config_name):
 
 def registe_routes(app):
     """Register routes."""
-    from . import views
+    from app.resources import views
     app.register_blueprint(views.bp)
-    from . import apis
+    from app.resources import apis
     app.register_blueprint(apis.bp)
 
     print(app.url_map)
