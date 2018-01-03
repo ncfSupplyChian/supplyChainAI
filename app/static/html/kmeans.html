@@ -1,5 +1,7 @@
 <html>
 <head>
+    <title>kmeans</title>
+    <link rel="stylesheet" href="/static/mloading/jquery.mloading.css">
 </head>
 <body>
 
@@ -20,11 +22,18 @@
 <script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/dataTables/datatables.min.css"/>
 <script type="text/javascript" src="/static/dataTables/datatables.min.js"></script>
+<script src="/static/mloading/jquery.mloading.js"></script>
 <script type="text/javascript">
     function kMeans() {
+         $("body").mLoading();
         var kvalue = $("#kvalue").val();
         $.getJSON('/api/v1/kmeans/' + kvalue, function (data) {
             $("#chValue").val(data.chValue);
+            if ($('#kmeansTable').hasClass('dataTable')) {
+                var dttable = $('#kmeansTable').dataTable();
+                dttable.fnClearTable(); //清空一下table
+                dttable.fnDestroy(); //还原初始化了的datatable
+            }
             $('#kmeansTable').DataTable({
                 data: data.resultList,
                 columns: [
@@ -33,7 +42,7 @@
                     {data: 'centerPoint'}
                 ]
             });
-
+         $("body").mLoading("hide");
         });
     }
 </script>

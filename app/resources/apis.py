@@ -11,7 +11,7 @@ bp = Blueprint('apis', __name__)
 @bp.route('/api/v1/kmeans/<kvalue>', methods=['GET'])
 def kmeans(kvalue):
     dataMat = []
-    fr = open("E:\\code\\python\\kmeans\\testset4.txt")
+    fr = open("E:\\code\\python\\data\\dshl_kmeans.txt")
     for line in fr.readlines():
         curLine = line.strip().split('\t')
         fltLine = list(map(float, curLine))  # 映射所有的元素为 float（浮点数）类型
@@ -22,7 +22,7 @@ def kmeans(kvalue):
     centers = km.cluster_centers_.tolist()  # 质心
     result_list = []
     for i, centerPoint in enumerate(centers):
-        result = {'kIndex': i, 'centerPoint': centerPoint, 'dataCount': 0}
+        result = {'kIndex': i + 1, 'centerPoint': centerPoint, 'dataCount': 0}
         result_list.append(result)
     for km_pred in km_preds:
         result_list[km_pred]['dataCount'] = result_list[km_pred]['dataCount'] + 1
