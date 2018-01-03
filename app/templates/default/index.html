@@ -10,47 +10,7 @@
 
 
 {% block body %}
-
-    {#<div class="page-header">#}
-    {#    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>#}
-    {#</div>#}
-    <div>
-        <input type="text" id="kvalue">
-        <input type="button" value="输入K值" onclick="kMeans()">
-        <div> <input type="text" id="chValue"> </div>
-        <table id="kmeansTable" class="display" style="table-layout: fixed;WORD-BREAK: break-all; WORD-WRAP: break-word">
-            <thead>
-            <tr>
-                <th>分组ID</th>
-                <th>数据个数</th>
-                <th width="400">质心坐标</th>
-            </tr>
-            </thead>
-        </table>
+    <div class="page-header">
+        <h1><a href="/static/html/kmeans.html">Kmeans</a> </h1>
     </div>
-    {#<form method="POST">#}
-    {#    {{ form.hidden_tag() }}#}
-    {#    {{ form.name.label }} {{ form.name() }}#}
-    {#    {{ form.submit() }}#}
-    {#</form>#}
-    <script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/dataTables/datatables.min.css"/>
-    <script type="text/javascript" src="/static/dataTables/datatables.min.js"></script>
-    <script type="text/javascript">
-        function kMeans() {
-            var kvalue = $("#kvalue").val();
-            $.getJSON('/api/v1/kmeans/' + kvalue, function (data) {
-                $("#chValue").val(data.chValue);
-                $('#kmeansTable').DataTable({
-                    data: data.resultList,
-                    columns: [
-                        {data: 'kIndex'},
-                        {data: 'dataCount'},
-                        {data: 'centerPoint'}
-                    ]
-                });
-
-            });
-        }
-    </script>
 {% endblock %}
