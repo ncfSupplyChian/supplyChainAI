@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn import tree
-# from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 
 # 用pandas加载数据.csv文件，然后用train_test_split分成训练集和测试集
@@ -11,26 +10,14 @@ feature_cols = ['最近登录间隔', '历史月均订单数量', '交易品牌�
 x = data[feature_cols]
 y = data['是否有退货']
 
-# 归一化
-# x = preprocessing.scale(x)
-# print(x[0])
-# x = preprocessing.MinMaxScaler().fit_transform(x)
-# print(x[0])
-# x = preprocessing.MaxAbsScaler().fit_transform(x)
-# print(x[0])
 
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.5)
 
 # 用决策树分类
-dt = tree.DecisionTreeClassifier(max_depth=4)
-# dt = RandomForestClassifier()
+dt = RandomForestClassifier(max_depth=9, n_estimators=100, criterion='entropy')
 dt.fit(X_train, y_train)
 predictions = dt.predict(X_test)
-with open("iris.dot", 'w') as f:
-    f = tree.export_graphviz(dt, out_file=f, feature_names=['recent_login', 'avg_monthly_order', 'trading_brands',
-                                                            'customer_price', 'reg_time', '6_months_avg_transactions',
-                                                            '6_months_avg_SKUs', '6_months_avg_transaction_amount',
-                                                            'dshl_score', 'cancel_order_number'])
+
 print('测试集score：', dt.score(X_test, y_test))
 print(dt.feature_importances_)
 print(dt.classes_)

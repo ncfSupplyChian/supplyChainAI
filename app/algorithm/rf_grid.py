@@ -1,6 +1,6 @@
 import pandas as pd
-from sklearn import tree
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import precision_score, recall_score, accuracy_score, classification_report
@@ -21,14 +21,15 @@ if __name__ == '__main__':
     # 计算量也是巨大的。不过这是一个并行问题，参数与参数彼此独立，
     # 计算过程不需要同步，所有很多方法都可以解决这个问题。scikit-learn有GridSearchCV()函数解决这个问题：
     pipeline = Pipeline([
-        ('clf', tree.DecisionTreeClassifier())
+        ('clf', RandomForestClassifier())
     ])
     parameters = {
         'clf__criterion': ('gini', 'entropy'),
-        'clf__max_depth': (4, 5, 6, 7, 8, 9, 10),
+        'clf__max_depth': (None, 4, 5, 6, 7, 8, 9, 10),
         'clf__max_leaf_nodes': (None, 5, 10),
+        'clf__n_estimators': (5, 10, 25, 50, 100),
     }
-    grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1, scoring='roc_auc', cv=3)
+    grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1, scoring='roc_auc', cv=5)
     grid_search.fit(X_train, y_train)
     print('最佳效果：%0.3f' % grid_search.best_score_)
     print('最优参数组合：')
