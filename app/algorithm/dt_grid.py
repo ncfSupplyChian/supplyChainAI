@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.linear_model.logistic import LogisticRegression
+from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     x = data[feature_cols]
     y = data['是否有退货']
 
-    X_train, X_test, y_train, y_test = train_test_split(x, y)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.5)
 
     # 网格搜索（Grid search）就是用来确定最优超参数的方法。
     # 其原理就是选取可能的参数不断运行模型获取最佳效果。
@@ -22,11 +22,12 @@ if __name__ == '__main__':
     # 计算量也是巨大的。不过这是一个并行问题，参数与参数彼此独立，
     # 计算过程不需要同步，所有很多方法都可以解决这个问题。scikit-learn有GridSearchCV()函数解决这个问题：
     pipeline = Pipeline([
-        ('clf', LogisticRegression())
+        ('clf', tree.DecisionTreeClassifier())
     ])
     parameters = {
-        'clf__penalty': ('l1', 'l2'),
-        'clf__C': (0.01, 0.1, 1, 10),
+        'clf__criterion': ('gini', 'entropy'),
+        'clf__max_depth': (4, 5, 6, 7, 8, 9, 10),
+        'clf__max_leaf_nodes': (None, 5, 10),
     }
     grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1, scoring='accuracy', cv=3)
     grid_search.fit(X_train, y_train)

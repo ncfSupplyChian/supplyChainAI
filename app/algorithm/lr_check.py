@@ -12,7 +12,7 @@ feature_cols = ['最近登录间隔', '历史月均订单数量', '交易品牌�
 x = data[feature_cols]
 y = data['是否有退货']
 
-X_train, X_test, y_train, y_test = train_test_split(x, y)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.5)
 
 # 用逻辑回归分类
 lr = LogisticRegression()
