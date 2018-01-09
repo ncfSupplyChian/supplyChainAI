@@ -3,6 +3,8 @@ import numpy as np
 from sklearn import preprocessing
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split, cross_val_score
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
 
 # 用pandas加载数据.csv文件，然后用train_test_split分成训练集和测试集
 data = pd.read_csv('E:\\code\\python\\data\\dshl_lr.csv')
@@ -23,7 +25,7 @@ print(x[0])
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.9)
 
 # 用支持向量机分类
-svm = SVC()
+svm = SVC(probability=True)
 svm.fit(X_train, y_train)
 predictions = svm.predict(X_test)
 
@@ -50,3 +52,20 @@ print('综合评价指标：', np.mean(f1s), f1s)
 roc_auc = cross_val_score(svm, X_train, y_train, cv=5, scoring='roc_auc')
 print('roc_auc：', np.mean(roc_auc), roc_auc)
 
+probas_ = svm.predict_proba(X_test)
+fpr, tpr, thresholds = roc_curve(y_test, probas_[:, 1])
+roc_auc = auc(fpr, tpr)
+plt.figure()
+plt.plot(fpr, tpr, lw=1, alpha=0.3,
+         label='ROC fold (AUC = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r',
+         label='Luck', alpha=.8)
+
+
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+plt.show()

@@ -32,3 +32,4 @@ marshmallow-jsonapi
 numpy
 pandas
 scikit-learn
+matplotlib

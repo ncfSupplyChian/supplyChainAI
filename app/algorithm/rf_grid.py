@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import precision_score, recall_score, accuracy_score, classification_report
+from sklearn.metrics import precision_score, recall_score, accuracy_score, classification_report, roc_auc_score
 
 if __name__ == '__main__':
     # 用pandas加载数据.csv文件，然后用train_test_split分成训练集和测试集
@@ -40,4 +40,6 @@ if __name__ == '__main__':
     print('准确率：', accuracy_score(y_test, predictions))
     print('精确率：', precision_score(y_test, predictions))
     print('召回率：', recall_score(y_test, predictions))
+    probas_ = grid_search.predict_proba(X_test)
+    print('ROC_AUC：', roc_auc_score(y_test, probas_))
     print(classification_report(y_test, predictions))
