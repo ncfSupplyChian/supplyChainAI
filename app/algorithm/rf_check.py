@@ -3,8 +3,8 @@ import app.algorithm.algorithm_util as au
 
 x_train, x_test, y_train, y_test = au.get_data(0.5)
 
-# 用决策树分类
-rf = RandomForestClassifier(max_depth=9, n_estimators=100, criterion='entropy')
+# 用决策树分类  criterion='entropy'
+rf = RandomForestClassifier(max_depth=9, n_estimators=100)
 rf.fit(x_train, y_train)
 predictions = rf.predict(x_test)
 

@@ -62,7 +62,7 @@ def draw_ks(clf, x, y):
     x_axis = np.arange(len(fpr)) / float(len(fpr))
     plt.figure(figsize=[6, 6])
     ks = max(abs(fpr - tpr))
-    print(ks)
+    print('KS值：',ks)
     plt.plot(fpr, x_axis, color='blue', label='fpr')
     plt.plot(tpr, x_axis, color='red', label='tpr')
     plt.legend(loc="lower right")
