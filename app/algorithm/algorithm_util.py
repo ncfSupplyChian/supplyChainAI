@@ -8,9 +8,12 @@ from sklearn.model_selection import train_test_split, cross_val_score
 
 
 def get_data(test_size):
-    data = pd.read_csv('E:\\code\\python\\data\\dshl_lr.csv')
-    feature_cols = ['最近登录间隔', '历史月均订单数量', '交易品牌数', '客单价', '注册时间长度',
-                    '近6个月月均交易笔数', '近6个月月均交易SKU数', '近6个月月均交易金额', '店商互联信用得分', '取消订单次数']
+    # data = pd.read_csv('E:\\code\\python\\data\\dshl_lr.csv')
+    # feature_cols = ['最近登录间隔', '历史月均订单数量', '交易品牌数', '客单价', '注册时间长度',
+    #                 '近6个月月均交易笔数', '近6个月月均交易SKU数', '近6个月月均交易金额', '店商互联信用得分', '取消订单次数']
+    feature_cols = ['最近登录间隔', '历史月均订单数量', '客单价', '注册时间长度',
+                    '近6个月月均交易笔数', '近6个月月均交易SKU数', '近6个月月均交易金额', '店商互联信用得分', '取消订单比例']
+    data = pd.read_csv('E:\\code\\python\\data\\dshl_new.csv')
     x = data[feature_cols]
     y = data['是否有退货']
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=0)

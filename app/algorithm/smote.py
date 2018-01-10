@@ -93,6 +93,6 @@ def smote(data, tag_index=None, max_amount=0, std_rate=5, kneighbor=5, kdistinct
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('E:\\code\\python\\data\\dshl_lr.csv')
-    data_new = smote(data, 11, std_rate=1)
+    data = pd.read_csv('E:\\code\\python\\data\\dshl_data_new.csv')
+    data_new = smote(data, 9, std_rate=1)
     data_new.to_csv('E:\\code\\python\\data\\dshl_new.csv', header=True, index=False)
